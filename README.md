@@ -206,9 +206,9 @@ python --version
 
 La API REST solo requiere **una terminal**.
 
-**Paso 1 — Abrir PowerShell y navegar a la carpeta:**
+**Paso 1 —  entrar a la carpeta:**
 ```bash
-cd "ruta\a\finance_kids_api\rest"
+cd "cd finance_kids_api\rest"
 ```
 
 **Paso 2 — Instalar dependencias:**

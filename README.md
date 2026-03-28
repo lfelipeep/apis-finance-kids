@@ -246,15 +246,17 @@ La API gRPC requiere **dos terminales** abiertas simultáneamente, más un paso 
 
 #### Primera vez (compilar el esquema .proto)
 
-**Paso 1 — Instalar dependencias gRPC:**
+**Paso 1 — Terminal 1 — Compilar el proto (solo la primera vez)**
 ```bash
-cd "ruta\a\finance_kids_api\grpc"
+cd "C:\Users\luisf\Downloads\apis trabajo\finance_kids_api\grpc"
 pip install grpcio grpcio-tools
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. finance_kids.proto"
+
 ```
 
-**Paso 2 — Compilar el archivo `.proto`** *(solo se hace una vez)*:
+**Paso 2 — Cuando termine sin errores, en esa misma terminal::
 ```bash
-python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. finance_kids.proto
+python grpc_server.py
 ```
 
 Esto genera automáticamente:
@@ -263,11 +265,12 @@ Esto genera automáticamente:
 
 <br>
 
-#### Terminal 1 — Servidor gRPC
+#### Terminal 2 — El puente (nueva ventana PowerShell):
 
 ```bash
-cd "ruta\a\finance_kids_api\grpc"
-python grpc_server.py
+cd "cd "C:\Users\luisf\Downloads\apis trabajo\finance_kids_api\grpc"
+python grpc_bridge.py"
+
 ```
 
 ✅ Corriendo cuando ves:
@@ -275,34 +278,6 @@ python grpc_server.py
 🐷 FINANCE KIDS — Servidor gRPC iniciado
 📡 Puerto: 50051
 ```
-
-<br>
-
-#### Terminal 2 — Puente HTTP→gRPC *(para el HTML)*
-
-> Los navegadores no pueden hablar gRPC directamente (protocolo binario). El puente traduce las peticiones HTTP del HTML a llamadas gRPC.
-
-```bash
-cd "ruta\a\finance_kids_api\grpc"
-python grpc_bridge.py
-```
-
-✅ Corriendo cuando ves:
-```
-🔌 FINANCE KIDS — Puente gRPC↔HTTP
-📡 HTTP:  http://localhost:5001
-📡 gRPC:  localhost:50051
-```
-
-> 💡 Con ambas terminales activas, abre `test_grpc.html` con doble clic. El punto en la barra superior se pondrá **verde** ✅
-
-**Opcional — Cliente en consola:**
-```bash
-# En una tercera terminal:
-python grpc_client.py
-```
-
-<br>
 
 ---
 
